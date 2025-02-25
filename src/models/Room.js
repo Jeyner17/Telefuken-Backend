@@ -1,4 +1,4 @@
-// src/models/Room.js
+
 class RoomManager {
     constructor() {
         this.rooms = new Map();
@@ -26,7 +26,7 @@ class RoomManager {
     addPlayer(roomCode, player) {
         const room = this.rooms.get(roomCode);
         if (!room || room.players.size >= room.maxPlayers) return false;
-        
+
         room.players.set(player.id, player);
         room.scores.set(player.name, new Array(7).fill(0));
         return true;
@@ -60,9 +60,19 @@ class RoomManager {
     updateScore(roomCode, playerName, scores) {
         const room = this.rooms.get(roomCode);
         if (!room) return false;
-        
+
         room.scores.set(playerName, scores);
         return true;
+    }
+
+    getRoomsByPlayerId(playerId) {
+        const result = [];
+        for (const [code, room] of this.rooms.entries()) {
+            if (room.players.has(playerId)) {
+                result.push(room);
+            }
+        }
+        return result;
     }
 }
 

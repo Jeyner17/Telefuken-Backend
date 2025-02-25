@@ -27,8 +27,47 @@ class RoomService {
         return this.roomManager.getRoom(roomCode);
     }
 
-    updateScores(roomCode, playerName, scores) {
-        return this.roomManager.updateScore(roomCode, playerName, scores);
+    updateScores(roomCode, playerName, score, round) {
+        return this.roomManager.updateScore(roomCode, playerName, score, round);
+    }
+
+    getPlayersList(roomCode) {
+        const room = this.roomManager.getRoom(roomCode);
+        if (!room) return [];
+
+        return Array.from(room.players.values()).map(player => player.name);
+    }
+
+    setCurrentRound(roomCode, roundIndex) {
+        const room = this.roomManager.getRoom(roomCode);
+        if (room) {
+            room.currentRound = roundIndex;
+            return true;
+        }
+        return false;
+    }
+
+    getCurrentRound(roomCode) {
+        const room = this.roomManager.getRoom(roomCode);
+        return room ? room.currentRound : 0;
+    }
+
+    startGame(roomCode) {
+        const room = this.roomManager.getRoom(roomCode);
+        if (room) {
+            room.gameStarted = true;
+            room.currentRound = 0;
+            return true;
+        }
+        return false;
+    }
+
+    checkRoom(roomCode) {
+        return !!this.roomManager.getRoom(roomCode);
+    }
+
+    getRoomsByPlayerId(playerId) {
+        return this.roomManager.getRoomsByPlayerId(playerId);
     }
 }
 
