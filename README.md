@@ -337,7 +337,7 @@ Este proyecto está bajo la licencia ISC. Ver el archivo `LICENSE` para más det
 
 ## 👨‍💻 Autor
 
-**Tu Nombre**
+**Jeyner Manzaba**
 - GitHub: [@Jeyner17](https://github.com/Jeyner17)
 - Email: jeyner.oswaldo@gmail.com
 
